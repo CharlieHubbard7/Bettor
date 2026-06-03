@@ -32,6 +32,17 @@ DEFAULT_REGIONS = "us"
 DEFAULT_MARKETS = "h2h,spreads,totals"
 DEFAULT_BOOKMAKERS = "pinnacle,draftkings,fanduel,betmgm,caesars"
 
+# Player-prop markets are only available on the per-event odds endpoint, not the
+# bulk sport-odds endpoint, so they are polled separately per event.
+PLAYER_PROP_MARKETS = [
+    "player_points",
+    "player_rebounds",
+    "player_assists",
+    "player_pass_tds",
+    "player_rush_yards",
+    "player_receiving_yards",
+]
+
 # Exponential backoff for HTTP 429 (rate-limited) responses.
 MAX_RETRIES = 5
 INITIAL_BACKOFF_SECONDS = 1.0
@@ -129,6 +140,47 @@ class OddsIngestionService:
             len(events_payload),
             line_count,
         )
+
+    async def poll_player_props(self, sport_key: str, event_id: str) -> None:
+        """Fetch and store player-prop odds for a single event.
+
+        Player props are only served by the per-event odds endpoint, so they require
+        one call per event. No-ops in fixture mode (props are not in the fixture).
+
+        Args:
+            sport_key: The Odds API sport key.
+            event_id: The event to fetch props for.
+        """
+        if self._use_fixture:
+            logger.debug("Skipping player props for {} (fixture mode)", event_id)
+            return
+
+        url = f"{ODDS_API_BASE_URL}/v4/sports/{sport_key}/events/{event_id}/odds"
+        params = {
+            "apiKey": self.settings.odds_api_key,
+            "regions": DEFAULT_REGIONS,
+            "markets": ",".join(PLAYER_PROP_MARKETS),
+            "bookmakers": DEFAULT_BOOKMAKERS,
+            "oddsFormat": "decimal",
+        }
+        response = await self._request_with_backoff("GET", url, params=params)
+        await self._log_api_usage(
+            f"/v4/sports/{sport_key}/events/{event_id}/odds", sport_key, response
+        )
+        event_blob = response.json()
+        if not event_blob.get("bookmakers"):
+            return
+
+        snapshot_time = datetime.utcnow()
+        snapshot = OddsSnapshot(
+            event_id=event_blob["id"],
+            raw_json=event_blob,
+            snapshot_time=snapshot_time,
+        )
+        self.session.add(snapshot)
+        await self.session.flush()
+        self._normalize_event_lines(event_blob, snapshot.id, snapshot_time)
+        await self.session.commit()
 
     async def poll_all_active_sports(self) -> None:
         """Poll every sport flagged ``active`` in the ``sports`` table."""
