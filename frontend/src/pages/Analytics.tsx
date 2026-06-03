@@ -181,7 +181,7 @@ export function Analytics() {
               <YAxis {...AXIS} />
               <Tooltip contentStyle={tooltipStyle} />
               <ReferenceLine y={0} stroke="#52525b" strokeDasharray="3 3" />
-              <Line type="monotone" dataKey="units" stroke="#34d399" dot={false} strokeWidth={2} />
+              <Line isAnimationActive={false} type="monotone" dataKey="units" stroke="#34d399" dot={false} strokeWidth={2} />
             </LineChart>
           </ResponsiveContainer>
         </Card>
@@ -193,7 +193,7 @@ export function Analytics() {
               <XAxis dataKey="label" {...AXIS} />
               <YAxis {...AXIS} allowDecimals={false} />
               <Tooltip contentStyle={tooltipStyle} />
-              <Bar dataKey="count">
+              <Bar isAnimationActive={false} dataKey="count">
                 {clvBuckets.map((b, i) => (
                   <Cell key={i} fill={b.positive ? "#34d399" : "#f87171"} />
                 ))}
@@ -238,8 +238,8 @@ export function Analytics() {
               <YAxis {...AXIS} />
               <Tooltip contentStyle={tooltipStyle} />
               <Legend wrapperStyle={{ fontSize: 11 }} />
-              <Bar dataKey="won" fill="#34d399" />
-              <Bar dataKey="lost" fill="#f87171" />
+              <Bar isAnimationActive={false} dataKey="won" fill="#34d399" />
+              <Bar isAnimationActive={false} dataKey="lost" fill="#f87171" />
             </BarChart>
           </ResponsiveContainer>
         </Card>
@@ -253,7 +253,7 @@ export function Analytics() {
               <Tooltip contentStyle={tooltipStyle} />
               <ReferenceLine y={50} stroke="#52525b" strokeDasharray="3 3" />
               <ReferenceLine y={55} stroke="#34d399" strokeDasharray="3 3" />
-              <Line type="monotone" dataKey="rate" stroke="#60a5fa" dot={false} strokeWidth={2} />
+              <Line isAnimationActive={false} type="monotone" dataKey="rate" stroke="#60a5fa" dot={false} strokeWidth={2} />
             </LineChart>
           </ResponsiveContainer>
         </Card>
@@ -265,7 +265,7 @@ export function Analytics() {
               <XAxis type="number" {...AXIS} unit="%" />
               <YAxis type="category" dataKey="book" width={80} {...AXIS} />
               <Tooltip contentStyle={tooltipStyle} />
-              <Bar dataKey="clv">
+              <Bar isAnimationActive={false} dataKey="clv">
                 {clvByBook.map((b, i) => (
                   <Cell key={i} fill={b.clv >= 0 ? "#34d399" : "#f87171"} />
                 ))}
