@@ -1,5 +1,70 @@
 # Session Log
 
+## Session Summary — 2026-06-03 (Phase 2 — Frontend + Backend additions)
+
+### Completed
+- **Phase 1 bug fix (targeted):** `services/results.py` — computed P&L into a local
+  `pnl_units` float so the type checker can prove non-null before deriving
+  `profit_loss_dollars` (was a `float | None` arithmetic warning on line 132). No behavior
+  change. Committed separately.
+- **Backend additions (no analytics logic changed):**
+  - `GET /api/system/stats` → DB counts (trades, events, snapshots, odds lines, active sports).
+  - `POST /api/system/seed` → runs the seed script logic on demand (for the Settings reset button).
+  - `services/odds_ingestion.py` — added `PLAYER_PROP_MARKETS` and a `poll_player_props()`
+    per-event method (player props are only on the per-event endpoint). Fixture fallback
+    preserved; live path is default when a real key is present.
+  - New schemas: `SystemStats`, `SeedResult`.
+- **Step 8 — Frontend scaffold:** Vite proxy `/api → :8000`, tsconfig `@/*` path alias +
+  strict, Tailwind dark theme with the surface/signal color tokens, postcss. `src/api/client.ts`
+  (the only place `fetch` is called), `src/types/index.ts` (mirrors backend schemas exactly),
+  `src/store/settingsStore.ts` (Zustand + localStorage), hooks (`useOpportunities` auto-refresh
+  60s, `useTrades`, `usePnl`, `useCLV`, `useBankroll`, `useCredits`, `useEvents`, `useSystemStats`),
+  shared components (StatCard, Badge, DataTable w/ sort + row expansion, PriceDisplay, EdgeBadge,
+  Card, Button, Toaster, feedback states, Layout w/ sidebar + paper-mode badge).
+- **Step 9 — All 6 pages:** Dashboard (opportunity feed + P&L/credits/bankroll widgets +
+  sparkline), Opportunities (filter bar + sortable table + inline book-comparison expansion),
+  Trade Logger (URL-prefilled form + live Kelly suggestion), Trade Journal (summary bar +
+  filters + 25/page pagination + CSV export + row detail), Analytics (6 Recharts panels:
+  equity curve, CLV histogram, edge-vs-P&L scatter w/ regression trendline, P&L by sport,
+  rolling 50-bet win rate, CLV by bookmaker), Settings (API config, trading params, system).
+- **Step 11 — Verified:** `tsc --noEmit` clean (strict), `pnpm build` succeeds (866 modules).
+  Ran backend (:8000, seeded) + Vite dev (:3000) together: frontend serves, `/api` proxy
+  reaches the backend, real data flows (pnl 100 trades / 55% / $1256 / 90 equity points;
+  opportunities = 1 after a poll).
+- **Step 12 — README** rewritten per spec (what it does, ASCII architecture, quick start,
+  key concepts, paper-trading-first, API key, project structure).
+
+### Current State
+- **Working:** Full stack builds and runs. Backend tests still green (26 passed). Frontend
+  typechecks strict and builds. End-to-end data wiring verified through the dev proxy.
+- **Verified by build + data flow, NOT by human eyeball:** chart rendering and visual layout
+  were not opened in a browser in this session — the React app builds and serves and the data
+  is correct, but someone should `pnpm dev` + open http://localhost:3000 to confirm the visuals.
+- **Deviations from the Phase 2 prompt's type sketches (intentional):** frontend types mirror
+  the *actual* Phase 1 backend schemas per CLAUDE.md ("mirror exactly"), so `PnLSummary` uses
+  `win_rate_pct` / `net_units` / `equity_curve[{date,bankroll,cumulative_pnl_units}]` rather
+  than the prompt's `win_rate` / `cumulative_units`. Dashboard "Today/Week/All-time" P&L and
+  the Analytics CLV-by-bookmaker / edge-vs-ROI / rolling-win-rate panels are computed
+  client-side from `/trades` + `/events` + `/analytics/bankroll` (the backend doesn't expose
+  per-trade-sport or per-book CLV directly). Opportunities' sport filter is best-effort
+  (opportunities carry team names, not `sport_key`) — noted inline in the page.
+- **Toolchain note:** pnpm/Docker aren't installed system-wide; used `corepack pnpm` and a pip
+  venv (`backend/.venv`). `node_modules`, `.venv`, `dist`, `bettor.db` are gitignored.
+
+### Next Session Should Start With
+- Open the app in a browser (`pnpm dev`) and visually confirm all 6 pages + 6 charts render.
+- When a real `ODDS_API_KEY` is available (from PA): run Step 10's live-poll verification
+  (real rows in odds_snapshots/odds_lines, real credits in api_usage_log, real opportunities).
+
+### Open Questions
+- Player-prop ingestion (`poll_player_props`) is implemented but unexercised without a live
+  key; confirm the real API's prop response nesting (the `description` field for player name)
+  on first live poll.
+- Bundle size warning (~672 kB, Recharts-dominated). Fine for an internal tool; could
+  code-split later if it matters.
+
+---
+
 ## Session Summary — 2026-06-03
 
 ### Completed

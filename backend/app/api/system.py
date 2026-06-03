@@ -7,8 +7,13 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.config import Settings
 from app.dependencies import get_db, get_settings
-from app.db.models import ApiUsageLog, Sport
-from app.schemas.analytics import ApiUsageSummary, PollResult
+from app.db.models import ApiUsageLog, Event, OddsLine, OddsSnapshot, Sport, Trade
+from app.schemas.analytics import (
+    ApiUsageSummary,
+    PollResult,
+    SeedResult,
+    SystemStats,
+)
 from app.services.odds_ingestion import OddsIngestionService
 
 router = APIRouter(prefix="/system", tags=["system"])
@@ -56,3 +61,40 @@ async def trigger_poll(
         sports_polled=sport_keys,
         detail=f"Polled {len(sport_keys)} active sport(s).",
     )
+
+
+@router.get("/stats", response_model=SystemStats)
+async def system_stats(session: AsyncSession = Depends(get_db)) -> SystemStats:
+    """Return database-wide counts for the Settings page."""
+
+    async def _count(model) -> int:
+        return int(await session.scalar(select(func.count()).select_from(model)) or 0)
+
+    active = int(
+        await session.scalar(
+            select(func.count()).select_from(Sport).where(Sport.active.is_(True))
+        )
+        or 0
+    )
+    return SystemStats(
+        total_trades=await _count(Trade),
+        total_events=await _count(Event),
+        total_snapshots=await _count(OddsSnapshot),
+        total_odds_lines=await _count(OddsLine),
+        active_sports=active,
+    )
+
+
+@router.post("/seed", response_model=SeedResult)
+async def seed_demo_data() -> SeedResult:
+    """(Re)seed the database with demo data — useful for resetting state.
+
+    Runs the same idempotent logic as ``scripts/seed_demo_data.py`` using its own
+    session, then returns a summary message.
+    """
+    # Imported lazily so the seed script's module-level setup runs only on demand.
+    from scripts.seed_demo_data import seed
+
+    await seed()
+    logger.info("Demo data reseeded via API")
+    return SeedResult(status="ok", detail="Demo data reseeded (100 trades).")

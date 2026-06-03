@@ -86,3 +86,20 @@ class PollResult(BaseModel):
     status: str
     sports_polled: list[str]
     detail: str
+
+
+class SystemStats(BaseModel):
+    """Database-wide counts surfaced on the Settings page."""
+
+    total_trades: int
+    total_events: int
+    total_snapshots: int
+    total_odds_lines: int
+    active_sports: int
+
+
+class SeedResult(BaseModel):
+    """Result of (re)seeding demo data."""
+
+    status: str
+    detail: str
