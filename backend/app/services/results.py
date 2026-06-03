@@ -122,13 +122,14 @@ class ResultsService:
             trade: The trade to settle.
             result: Win/loss/push outcome.
         """
+        pnl_units = settle_pnl(trade.stake_units, trade.entry_price_decimal, result)
         trade.result = result
         trade.status = TradeStatus.settled
-        trade.profit_loss_units = settle_pnl(
-            trade.stake_units, trade.entry_price_decimal, result
-        )
+        trade.profit_loss_units = pnl_units
         if trade.stake_dollars is not None:
-            unit_dollars = trade.stake_dollars / trade.stake_units if trade.stake_units else 0.0
-            trade.profit_loss_dollars = trade.profit_loss_units * unit_dollars
+            unit_dollars = (
+                trade.stake_dollars / trade.stake_units if trade.stake_units else 0.0
+            )
+            trade.profit_loss_dollars = pnl_units * unit_dollars
         trade.settled_at = datetime.utcnow()
         await self.apply_clv(trade)
