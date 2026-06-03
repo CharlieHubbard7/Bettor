@@ -1,0 +1,37 @@
+services:
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: bettor
+      POSTGRES_PASSWORD: bettor
+      POSTGRES_DB: bettor
+    ports: ["5432:5432"]
+    volumes: ["postgres_data:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U bettor"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build: ./backend
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    ports: ["8000:8000"]
+    volumes: ["./backend:/app"]
+    env_file: ./backend/.env
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  frontend:
+    build: ./frontend
+    command: pnpm dev --host
+    ports: ["3000:3000"]
+    volumes: ["./frontend:/app", "/app/node_modules"]
+
+volumes:
+  postgres_data:
+
+networks:
+  default:
+    name: bettor-network

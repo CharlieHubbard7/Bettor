@@ -1,0 +1,308 @@
+[
+  {
+    "id": "nfl-2026-kc-buf-001",
+    "sport_key": "americanfootball_nfl",
+    "sport_title": "NFL",
+    "commence_time": "2026-09-13T17:00:00Z",
+    "home_team": "Buffalo Bills",
+    "away_team": "Kansas City Chiefs",
+    "bookmakers": [
+      {
+        "key": "pinnacle",
+        "title": "Pinnacle",
+        "last_update": "2026-09-13T16:30:00Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2026-09-13T16:30:00Z",
+            "outcomes": [
+              { "name": "Buffalo Bills", "price": 1.91 },
+              { "name": "Kansas City Chiefs", "price": 1.95 }
+            ]
+          },
+          {
+            "key": "spreads",
+            "last_update": "2026-09-13T16:30:00Z",
+            "outcomes": [
+              { "name": "Buffalo Bills", "price": 1.92, "point": -1.5 },
+              { "name": "Kansas City Chiefs", "price": 1.92, "point": 1.5 }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "draftkings",
+        "title": "DraftKings",
+        "last_update": "2026-09-13T16:31:00Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2026-09-13T16:31:00Z",
+            "outcomes": [
+              { "name": "Buffalo Bills", "price": 2.15 },
+              { "name": "Kansas City Chiefs", "price": 1.74 }
+            ]
+          },
+          {
+            "key": "spreads",
+            "last_update": "2026-09-13T16:31:00Z",
+            "outcomes": [
+              { "name": "Buffalo Bills", "price": 1.95, "point": -1.5 },
+              { "name": "Kansas City Chiefs", "price": 1.87, "point": 1.5 }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2026-09-13T16:31:30Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2026-09-13T16:31:30Z",
+            "outcomes": [
+              { "name": "Buffalo Bills", "price": 1.98 },
+              { "name": "Kansas City Chiefs", "price": 1.88 }
+            ]
+          },
+          {
+            "key": "spreads",
+            "last_update": "2026-09-13T16:31:30Z",
+            "outcomes": [
+              { "name": "Buffalo Bills", "price": 1.91, "point": -1.5 },
+              { "name": "Kansas City Chiefs", "price": 1.91, "point": 1.5 }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betmgm",
+        "title": "BetMGM",
+        "last_update": "2026-09-13T16:32:00Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2026-09-13T16:32:00Z",
+            "outcomes": [
+              { "name": "Buffalo Bills", "price": 1.90 },
+              { "name": "Kansas City Chiefs", "price": 1.95 }
+            ]
+          },
+          {
+            "key": "spreads",
+            "last_update": "2026-09-13T16:32:00Z",
+            "outcomes": [
+              { "name": "Buffalo Bills", "price": 1.89, "point": -1.5 },
+              { "name": "Kansas City Chiefs", "price": 1.93, "point": 1.5 }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "nfl-2026-sf-dal-002",
+    "sport_key": "americanfootball_nfl",
+    "sport_title": "NFL",
+    "commence_time": "2026-09-13T20:25:00Z",
+    "home_team": "Dallas Cowboys",
+    "away_team": "San Francisco 49ers",
+    "bookmakers": [
+      {
+        "key": "pinnacle",
+        "title": "Pinnacle",
+        "last_update": "2026-09-13T19:55:00Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2026-09-13T19:55:00Z",
+            "outcomes": [
+              { "name": "Dallas Cowboys", "price": 2.62 },
+              { "name": "San Francisco 49ers", "price": 1.53 }
+            ]
+          },
+          {
+            "key": "spreads",
+            "last_update": "2026-09-13T19:55:00Z",
+            "outcomes": [
+              { "name": "Dallas Cowboys", "price": 1.91, "point": 4.5 },
+              { "name": "San Francisco 49ers", "price": 1.93, "point": -4.5 }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "draftkings",
+        "title": "DraftKings",
+        "last_update": "2026-09-13T19:56:00Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2026-09-13T19:56:00Z",
+            "outcomes": [
+              { "name": "Dallas Cowboys", "price": 2.55 },
+              { "name": "San Francisco 49ers", "price": 1.55 }
+            ]
+          },
+          {
+            "key": "spreads",
+            "last_update": "2026-09-13T19:56:00Z",
+            "outcomes": [
+              { "name": "Dallas Cowboys", "price": 1.87, "point": 4.5 },
+              { "name": "San Francisco 49ers", "price": 1.95, "point": -4.5 }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2026-09-13T19:56:30Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2026-09-13T19:56:30Z",
+            "outcomes": [
+              { "name": "Dallas Cowboys", "price": 2.80 },
+              { "name": "San Francisco 49ers", "price": 1.50 }
+            ]
+          },
+          {
+            "key": "spreads",
+            "last_update": "2026-09-13T19:56:30Z",
+            "outcomes": [
+              { "name": "Dallas Cowboys", "price": 1.93, "point": 4.5 },
+              { "name": "San Francisco 49ers", "price": 1.89, "point": -4.5 }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betmgm",
+        "title": "BetMGM",
+        "last_update": "2026-09-13T19:57:00Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2026-09-13T19:57:00Z",
+            "outcomes": [
+              { "name": "Dallas Cowboys", "price": 2.60 },
+              { "name": "San Francisco 49ers", "price": 1.52 }
+            ]
+          },
+          {
+            "key": "spreads",
+            "last_update": "2026-09-13T19:57:00Z",
+            "outcomes": [
+              { "name": "Dallas Cowboys", "price": 1.90, "point": 4.5 },
+              { "name": "San Francisco 49ers", "price": 1.92, "point": -4.5 }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "nfl-2026-phi-nyg-003",
+    "sport_key": "americanfootball_nfl",
+    "sport_title": "NFL",
+    "commence_time": "2026-09-14T00:20:00Z",
+    "home_team": "New York Giants",
+    "away_team": "Philadelphia Eagles",
+    "bookmakers": [
+      {
+        "key": "pinnacle",
+        "title": "Pinnacle",
+        "last_update": "2026-09-13T23:50:00Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2026-09-13T23:50:00Z",
+            "outcomes": [
+              { "name": "New York Giants", "price": 3.10 },
+              { "name": "Philadelphia Eagles", "price": 1.40 }
+            ]
+          },
+          {
+            "key": "spreads",
+            "last_update": "2026-09-13T23:50:00Z",
+            "outcomes": [
+              { "name": "New York Giants", "price": 1.91, "point": 7.5 },
+              { "name": "Philadelphia Eagles", "price": 1.93, "point": -7.5 }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "draftkings",
+        "title": "DraftKings",
+        "last_update": "2026-09-13T23:51:00Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2026-09-13T23:51:00Z",
+            "outcomes": [
+              { "name": "New York Giants", "price": 3.05 },
+              { "name": "Philadelphia Eagles", "price": 1.42 }
+            ]
+          },
+          {
+            "key": "spreads",
+            "last_update": "2026-09-13T23:51:00Z",
+            "outcomes": [
+              { "name": "New York Giants", "price": 1.88, "point": 7.5 },
+              { "name": "Philadelphia Eagles", "price": 1.94, "point": -7.5 }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2026-09-13T23:51:30Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2026-09-13T23:51:30Z",
+            "outcomes": [
+              { "name": "New York Giants", "price": 3.35 },
+              { "name": "Philadelphia Eagles", "price": 1.38 }
+            ]
+          },
+          {
+            "key": "spreads",
+            "last_update": "2026-09-13T23:51:30Z",
+            "outcomes": [
+              { "name": "New York Giants", "price": 1.92, "point": 7.5 },
+              { "name": "Philadelphia Eagles", "price": 1.90, "point": -7.5 }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betmgm",
+        "title": "BetMGM",
+        "last_update": "2026-09-13T23:52:00Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2026-09-13T23:52:00Z",
+            "outcomes": [
+              { "name": "New York Giants", "price": 3.00 },
+              { "name": "Philadelphia Eagles", "price": 1.41 }
+            ]
+          },
+          {
+            "key": "spreads",
+            "last_update": "2026-09-13T23:52:00Z",
+            "outcomes": [
+              { "name": "New York Giants", "price": 1.90, "point": 7.5 },
+              { "name": "Philadelphia Eagles", "price": 1.92, "point": -7.5 }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
